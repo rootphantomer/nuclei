@@ -2,7 +2,6 @@ package installer
 
 import (
 	"bytes"
-	"context"
 	"crypto/md5"
 	"fmt"
 	"io"
@@ -70,14 +69,15 @@ func (t *TemplateManager) FreshInstallIfNotExists() error {
 	if fileutil.FolderExists(config.DefaultConfig.TemplatesDirectory) {
 		return nil
 	}
-	gologger.Info().Msgf("nuclei-templates are not installed, installing...")
-	if err := t.installTemplatesAt(config.DefaultConfig.TemplatesDirectory); err != nil {
-		return errorutil.NewWithErr(err).Msgf("failed to install templates at %s", config.DefaultConfig.TemplatesDirectory)
-	}
-	if t.CustomTemplates != nil {
-		t.CustomTemplates.Download(context.TODO())
-	}
 	return nil
+	//gologger.Info().Msgf("nuclei-templates are not installed, installing...")
+	//if err := t.installTemplatesAt(config.DefaultConfig.TemplatesDirectory); err != nil {
+	//	return errorutil.NewWithErr(err).Msgf("failed to install templates at %s", config.DefaultConfig.TemplatesDirectory)
+	//}
+	//if t.CustomTemplates != nil {
+	//	t.CustomTemplates.Download(context.TODO())
+	//}
+	//return nil
 }
 
 // UpdateIfOutdated updates templates if they are outdated

@@ -12,15 +12,13 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/projectdiscovery/nuclei/v2/internal/installer"
-	"github.com/projectdiscovery/nuclei/v2/internal/runner/nucleicloud"
-	uncoverlib "github.com/projectdiscovery/uncover"
-	permissionutil "github.com/projectdiscovery/utils/permission"
-	updateutils "github.com/projectdiscovery/utils/update"
-
 	"github.com/logrusorgru/aurora"
 	"github.com/pkg/errors"
+	"github.com/projectdiscovery/nuclei/v2/internal/installer"
+	"github.com/projectdiscovery/nuclei/v2/internal/runner/nucleicloud"
 	"github.com/projectdiscovery/ratelimit"
+	uncoverlib "github.com/projectdiscovery/uncover"
+	permissionutil "github.com/projectdiscovery/utils/permission"
 
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/nuclei/v2/internal/colorizer"
@@ -429,11 +427,11 @@ func (r *Runner) Close() {
 // binary and runs the actual enumeration
 func (r *Runner) RunEnumeration() error {
 	// If user asked for new templates to be executed, collect the list from the templates' directory.
-	if r.options.NewTemplates {
-		if arr := config.DefaultConfig.GetNewAdditions(); len(arr) > 0 {
-			r.options.Templates = append(r.options.Templates, arr...)
-		}
-	}
+	//if r.options.NewTemplates {
+	//	if arr := config.DefaultConfig.GetNewAdditions(); len(arr) > 0 {
+	//		r.options.Templates = append(r.options.Templates, arr...)
+	//	}
+	//}
 	if len(r.options.NewTemplatesWithVersion) > 0 {
 		if arr := installer.GetNewTemplatesInVersions(r.options.NewTemplatesWithVersion...); len(arr) > 0 {
 			r.options.Templates = append(r.options.Templates, arr...)
@@ -731,11 +729,11 @@ func (r *Runner) displayExecutionInfo(store *loader.Store) {
 
 	cfg := config.DefaultConfig
 
-	gologger.Info().Msgf("Current nuclei version: %v %v", config.Version, updateutils.GetVersionDescription(config.Version, cfg.LatestNucleiVersion))
-	gologger.Info().Msgf("Current nuclei-templates version: %v %v", cfg.TemplateVersion, updateutils.GetVersionDescription(cfg.TemplateVersion, cfg.LatestNucleiTemplatesVersion))
+	//gologger.Info().Msgf("Current nuclei version: %v %v", config.Version, updateutils.GetVersionDescription(config.Version, cfg.LatestNucleiVersion))
+	gologger.Info().Msgf("Current nuclei-templates version: %v ", cfg.TemplateVersion)
 
 	if len(store.Templates()) > 0 {
-		gologger.Info().Msgf("New templates added in latest release: %d", len(config.DefaultConfig.GetNewAdditions()))
+		//gologger.Info().Msgf("New templates added in latest release: %d", len(config.DefaultConfig.GetNewAdditions()))
 		gologger.Info().Msgf("Templates loaded for current scan: %d", len(store.Templates()))
 	}
 	if len(store.Workflows()) > 0 {
