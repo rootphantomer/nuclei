@@ -427,11 +427,11 @@ func (r *Runner) Close() {
 // binary and runs the actual enumeration
 func (r *Runner) RunEnumeration() error {
 	// If user asked for new templates to be executed, collect the list from the templates' directory.
-	//if r.options.NewTemplates {
-	//	if arr := config.DefaultConfig.GetNewAdditions(); len(arr) > 0 {
-	//		r.options.Templates = append(r.options.Templates, arr...)
-	//	}
-	//}
+	if r.options.NewTemplates {
+		if arr := config.DefaultConfig.GetNewAdditions(); len(arr) > 0 {
+			r.options.Templates = append(r.options.Templates, arr...)
+		}
+	}
 	if len(r.options.NewTemplatesWithVersion) > 0 {
 		if arr := installer.GetNewTemplatesInVersions(r.options.NewTemplatesWithVersion...); len(arr) > 0 {
 			r.options.Templates = append(r.options.Templates, arr...)
